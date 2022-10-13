@@ -10,9 +10,17 @@ const router = express.Router();
 //router.use(authController.protect);
 
 router.route("/").get(productController.getAllProducts).post(
-  // authController.restrictTo("admin"),
+  //authController.restrictTo("admin"),
   productController.uploadProductCoverImage,
   productController.resizeProductCoverImage,
+  // productController.uploadProductFirstImage,
+  // productController.resizeProductFirstImage,
+  // productController.uploadProductSecondImage,
+  // productController.resizeProductSecondImage,
+  // productController.uploadProductThirdImage,
+  // productController.resizeProductThirdImage,
+  // productController.uploadProductFourthImage,
+  // productController.resizeProductFourthImage,
   productController.createProduct
 );
 
@@ -20,8 +28,16 @@ router
   .route("/:id")
   .get(productController.getProduct)
   .patch(
-    productController.uploadProductImages,
-    productController.resizeProductImages,
+    productController.uploadProductCoverImage,
+    productController.resizeProductCoverImage,
+    // productController.uploadProductFirstImage,
+    // productController.resizeProductFirstImage,
+    // productController.uploadProductSecondImage,
+    // productController.resizeProductSecondImage,
+    // productController.uploadProductThirdImage,
+    // productController.resizeProductThirdImage,
+    // productController.uploadProductFourthImage,
+    // productController.resizeProductFourthImage,
     productController.updateProduct
   )
   .delete(

@@ -31,6 +31,7 @@ const orderAssignmentRouter = require("./routes/orderAssignmentRoute");
 const orderDeliveryRouter = require("./routes/orderDeliveryRoute");
 const orderOnTransitRouter = require("./routes/orderOnTransitRoute");
 const orderOnCompletionRouter = require("./routes/orderOnCompletionRoute");
+const cartRoute = require("./routes/cartRoute");
 
 const app = express();
 
@@ -119,6 +120,7 @@ app.use("/api/v1/orderassignments", orderAssignmentRouter);
 app.use("/api/v1/orderdeliveries", orderDeliveryRouter);
 app.use("/api/v1/orderontransits", orderOnTransitRouter);
 app.use("/api/v1/orderoncompletions", orderOnCompletionRouter);
+app.use("/api/v1/carts", cartRoute);
 
 //tackling unhandled routes
 app.all("*", (req, res, next) => {

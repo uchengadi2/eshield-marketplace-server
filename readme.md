@@ -1,3 +1,3 @@
-# B2B Marketplace
+# Logistics Marketplace
 
 Built using modern Technologies: Node, Express, MongoDB, mongoose

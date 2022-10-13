@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Every product must have a name"],
+      required: [false, "Every product must have a name"],
     },
     shortDescription: {
       type: String,
@@ -16,19 +16,20 @@ const productSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    plateNumber: {
+    sku: {
+      type: String,
+    },
+    refNumber: {
       type: String,
     },
     imageCover: {
       type: String,
       required: [false, "Please provide the image cover"],
     },
-    images: {
-      type: String,
-    },
     firstImage: {
       type: String,
     },
+
     secondImage: {
       type: String,
     },
@@ -39,10 +40,13 @@ const productSchema = new mongoose.Schema(
       type: String,
     },
 
-    quantity: {
+    totalUnits: {
       type: Number,
-      default: 1,
+
       required: [false, "A product must have quanyity"],
+    },
+    remainingTotalUnits: {
+      type: Number,
     },
 
     category: [
@@ -55,29 +59,87 @@ const productSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Vendor",
     },
-    address: {
-      type: String,
-    },
-    city: {
-      type: mongoose.Schema.ObjectId,
-      ref: "City",
-    },
-    state: {
-      type: mongoose.Schema.ObjectId,
-      ref: "State",
-    },
-    country: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Country",
-    },
-
     make: {
       type: String,
     },
     model: {
       type: String,
     },
-    chassis: {
+
+    color: {
+      type: String,
+    },
+    size: {
+      type: String,
+    },
+    design: {
+      type: String,
+    },
+    weightPerUnit: {
+      type: Number,
+    },
+    content: {
+      type: String,
+    },
+    smell: {
+      type: String,
+    },
+    taste: {
+      type: String,
+    },
+    feel: {
+      type: String,
+    },
+    ingredients: {
+      type: String,
+    },
+    reliability: {
+      type: String,
+    },
+    safety: {
+      type: String,
+    },
+    packaging: {
+      type: String,
+    },
+    marketingClaims: {
+      type: String,
+    },
+    durability: {
+      type: String,
+    },
+    pricePerUnit: {
+      type: Number,
+    },
+    currency: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Currency",
+    },
+    ranking: {
+      default: 1,
+      type: Number,
+    },
+    keyword1: {
+      type: String,
+    },
+    keyword2: {
+      type: String,
+    },
+    keyword3: {
+      type: String,
+    },
+    locationCountry: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Country",
+    },
+    location: {
+      type: mongoose.Schema.ObjectId,
+      ref: "State",
+    },
+    minimumQuantity: {
+      type: Number,
+    },
+    unit: {
       type: String,
     },
 

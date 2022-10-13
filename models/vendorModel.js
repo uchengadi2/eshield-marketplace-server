@@ -96,51 +96,6 @@ const vendorSchema = new mongoose.Schema(
         required: [false, "Please provide the bank's IBAN number"],
       },
     },
-    contract: {
-      enforceGlobalPlatformPolicyContract: {
-        type: Boolean,
-        default: true,
-        required: [true, "This field must be populated"],
-      },
-      permittableMaximumNumberOfPaymentInstallments: {
-        type: Number,
-        required: [
-          true,
-          "Please enter the maximum number of installmental payment allowed per deal",
-        ],
-        default: 1,
-      },
-      initialPaymentInstallment: {
-        initialPaymentAgreedRemittablePercentage: Number,
-        initialPaymentAgreedDaysToPaymentRemittance: Number,
-        initialPaymentPlatformPercentageForRetention: Number,
-        percentageAmountForInitialInstallmentPayment: Number,
-      },
-      secondPaymentInstallment: {
-        secondPaymentAgreedRemittablePercentage: Number,
-        secondPaymentAgreedDaysToPaymentRemittance: Number,
-        secondPaymentPlatformPercentageForRetention: Number,
-        percentageAmountForSecondInstallmentPayment: Number,
-      },
-      thirdPaymentInstallment: {
-        thirdPaymentAgreedRemittablePercentage: Number,
-        thirdPaymentAgreedDaysToPaymentRemittance: Number,
-        thirdPaymentPlatformPercentageForRetention: Number,
-        percentageAmountForThirdInstallmentPayment: Number,
-      },
-    },
-    exemptedCities: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "City",
-      },
-    ],
-    product: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Product",
-      },
-    ],
   },
   {
     toJSON: { virtuals: true },
