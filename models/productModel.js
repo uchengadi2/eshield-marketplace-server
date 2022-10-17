@@ -142,6 +142,24 @@ const productSchema = new mongoose.Schema(
     unit: {
       type: String,
     },
+    deliveryCostPerUnitWithinProductLocation: {
+      type: Number,
+    },
+    baselineDeliveryCostWithinProductLocation: {
+      type: Number,
+    },
+    maxmumQuantityForBaselineDelivery: {
+      type: Number,
+    },
+    estimatedDeliveryPeriodInDays: {
+      type: Number,
+    },
+    estimatedDeliveryPeriodInHours: {
+      type: Number,
+    },
+    estimatedDeliveryPeriodInMinutes: {
+      type: Number,
+    },
 
     createdAt: {
       type: Date,

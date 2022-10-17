@@ -30,6 +30,35 @@ const cartSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Country",
     },
+    recipientName: {
+      type: String,
+    },
+    recipientPhoneNumber: {
+      type: String,
+    },
+    recipientAddress: {
+      type: String,
+    },
+    recipientCountry: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Country",
+    },
+    recipientState: {
+      type: mongoose.Schema.ObjectId,
+      ref: "State",
+    },
+    status: {
+      type: String,
+      default: "unmarked-for-checkout",
+      enum: ["unmarked-for-checkout", "marked-for-checkout"],
+    },
+    totalDeliveryCost: {
+      type: Number,
+    },
+    contactMeForTheDeliveryCost: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   {
