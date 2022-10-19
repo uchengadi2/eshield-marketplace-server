@@ -57,6 +57,9 @@ const userSchema = new mongoose.Schema(
         ref: "Vendor",
       },
     ],
+    phoneNumber: {
+      type: String,
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -115,7 +118,7 @@ userSchema.methods.createPasswordResetToken = function () {
     .update(resetToken)
     .digest("hex");
 
-    //this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+  //this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
   this.passwordResetExpiresAt = Date.now() + 10 * 60 * 1000;
 
   return resetToken;

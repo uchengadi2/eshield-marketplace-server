@@ -47,6 +47,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     role: req.body.role,
     passwordResetToken: req.body.passwordResetToken,
     vendor: req.body.vendor,
+    phoneNumber: req.body.phoneNumber,
   });
 
   createSendToken(newUser, 201, res);
