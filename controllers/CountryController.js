@@ -1,9 +1,9 @@
 const multer = require("multer");
 const sharp = require("sharp");
 const Country = require("../models/countryModel");
-const APIFeatures = require("./../utils/apiFeatures");
-const catchAsync = require("./../utils/catchAsync");
-const AppError = require("./../utils/appError");
+const APIFeatures = require("../utils/apiFeatures");
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appError");
 const factory = require("./handlerFactory");
 
 const multerStorage = multer.memoryStorage();

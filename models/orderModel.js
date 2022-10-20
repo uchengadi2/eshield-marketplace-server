@@ -8,222 +8,78 @@ const orderSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    cartId: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Cart",
+    },
+    product: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Product",
+    },
+    quantityAdddedToCart: {
+      type: Number,
+    },
+    orderedQuantity: {
+      type: Number,
+    },
+    orderedPrice: {
+      type: Number,
+    },
+    productCurrency: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Currency",
+    },
+    productLocation: {
+      type: mongoose.Schema.ObjectId,
+      ref: "State",
+    },
+    locationCountry: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Country",
+    },
+    totalDeliveryCost: {
+      type: Number,
+    },
+    totalProductCost: {
+      type: Number,
+    },
+    recipientName: {
+      type: String,
+    },
+    recipientPhoneNumber: {
+      type: String,
+    },
+    recipientAddress: {
+      type: String,
+    },
+    recipientState: {
+      type: mongoose.Schema.ObjectId,
+      ref: "State",
+    },
+    recipientCountry: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Country",
+    },
+    dateAddedToCart: {
+      type: Date,
+    },
+
     dateOrdered: {
       type: Date,
       default: Date.now,
     },
-    status: {
+    orderedBy: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
+
+    paymentStatus: {
       type: String,
-      default: "pending",
-      enum: ["pending", "assigned"],
+      enum: ["to-be-confirmed", "paid-but-awaiting-confirmation", "paid"],
     },
-    category: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Category",
-      },
-    ],
-    consignmentCountry: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Country",
-      },
-    ],
-
-    destinationCountry: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Country",
-      },
-    ],
-    orderQuantity: {
-      type: Number,
-      required: [false, "Please provide the quantity you are ordering"],
-      min: 1,
-    },
-    totalUnassignedQuantity: {
-      type: Number,
-      required: [false, "Please provide the quantity you are ordering"],
-      min: 1,
-    },
-    orderedBy: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "User",
-      },
-    ],
-    remainingOrderedQuantity: Number,
-
-    consignment: {
-      name: {
-        type: String,
-      },
-      description: {
-        type: String,
-        trim: true,
-      },
-      weight: {
-        weight: {
-          type: Number,
-        },
-        unit: String,
-      },
-      owner: {
-        type: String,
-        required: [
-          false,
-          "Please provide the name of the owner of this consignment",
-        ],
-      },
-      type: {
-        type: String,
-        required: [false, "Please provide the consignment type"],
-      },
-      quantity: {
-        type: Number,
-        default: 1,
-      },
-      coverImage: String,
-      images: [String],
-    },
-    sourceLocation: {
-      sourceName: {
-        type: String,
-        required: [false, "Please provide the name of the location"],
-      },
-      sourceDescription: {
-        type: String,
-        trim: true,
-      },
-      sourceAddress: {
-        type: String,
-        trim: true,
-      },
-      sourceCoordinates: [Number],
-      // sourceLatitude: Number,
-      // sourceLongtitude: Number,
-      sourceType: {
-        type: String,
-        default: "Point",
-        enum: ["Point"],
-      },
-      sourceCity: [
-        {
-          type: mongoose.Schema.ObjectId,
-          ref: "City",
-        },
-      ],
-      sourceState: [
-        {
-          type: mongoose.Schema.ObjectId,
-          ref: "State",
-        },
-      ],
-      sourcePlaceType: {
-        type: String,
-        default: "others",
-        enum: [
-          "warehouse",
-          "port",
-          "jetty",
-          "airport",
-          "park",
-          "street",
-          "businessPlace",
-          "residentialBuilding",
-          "school",
-          "complex",
-          "market",
-          "placeofWorship",
-          "militaryZone",
-          "plantation",
-          "farm",
-          "forest",
-          "zoo",
-          "barracks",
-          "others",
-        ],
-      },
-      sourceContactPerson: {
-        contactPersonName: String,
-        contactPersonPhoneNumber: String,
-      },
-    },
-
-    destinationLocation: {
-      destinationName: {
-        type: String,
-        required: [
-          false,
-          "Please provide the name of the destination location",
-        ],
-      },
-      destinationDescription: {
-        type: String,
-        trim: true,
-      },
-      destinationAddress: {
-        type: String,
-        trim: true,
-      },
-      destinationCoordinates: [Number],
-      // destinationLatitude: Number,
-      // destinationLongtitude: Number,
-      destinationType: {
-        type: String,
-        default: "Point",
-        enum: ["Point"],
-      },
-      destinationCity: [
-        {
-          type: mongoose.Schema.ObjectId,
-          ref: "City",
-        },
-      ],
-      destinationState: [
-        {
-          type: mongoose.Schema.ObjectId,
-          ref: "State",
-        },
-      ],
-      destinationPlaceType: {
-        type: String,
-        default: "others",
-        enum: [
-          "warehouse",
-          "port",
-          "jetty",
-          "airport",
-          "park",
-          "street",
-          "businessPlace",
-          "residentialBuilding",
-          "school",
-          "complex",
-          "market",
-          "placeofWorship",
-          "militaryZone",
-          "plantation",
-          "farm",
-          "forest",
-          "zoo",
-          "barracks",
-          "others",
-        ],
-      },
-      destinationContactPerson: {
-        destinationContactPersonName: String,
-        destinationContactPersonPhoneNumber: String,
-      },
-    },
-    logisticsInsurancetype: {
+    paymentMethod: {
       type: String,
-      enum: [
-        "notApplicable",
-        "atSourceCountryOnly",
-        "atDestinationCountryOnly",
-        "fromSourceToDestination",
-      ],
+      enum: ["cheque", "card", "bank-transfer", "cash"],
     },
   },
   {
