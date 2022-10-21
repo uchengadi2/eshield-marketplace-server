@@ -79,7 +79,7 @@ const orderSchema = new mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      enum: ["cheque", "card", "bank-transfer", "cash"],
+      enum: ["cheque", "card", "bankransfer", "cash"],
     },
   },
   {

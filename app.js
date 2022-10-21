@@ -32,6 +32,7 @@ const orderDeliveryRouter = require("./routes/orderDeliveryRoute");
 const orderOnTransitRouter = require("./routes/orderOnTransitRoute");
 const orderOnCompletionRouter = require("./routes/orderOnCompletionRoute");
 const cartRoute = require("./routes/cartRoute");
+const rateRoute = require("./routes/rateRoute");
 
 const app = express();
 
@@ -53,7 +54,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const limiter = rateLimit({
-  max: 1000,
+  max: 1500,
   windowMs: 60 * 60 * 1000,
   message: "Too many request from this IP, Please try again in an hour",
 });
@@ -121,6 +122,7 @@ app.use("/api/v1/orderdeliveries", orderDeliveryRouter);
 app.use("/api/v1/orderontransits", orderOnTransitRouter);
 app.use("/api/v1/orderoncompletions", orderOnCompletionRouter);
 app.use("/api/v1/carts", cartRoute);
+app.use("/api/v1/rates", rateRoute);
 
 //tackling unhandled routes
 app.all("*", (req, res, next) => {
