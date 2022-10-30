@@ -172,6 +172,15 @@ const productSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
+
+    isFeaturedProduct: {
+      type: Boolean,
+      default: false,
+    },
+
+    priceMarkupPerUnit: {
+      type: Number,
+    },
   },
   {
     toJSON: { virtuals: true },

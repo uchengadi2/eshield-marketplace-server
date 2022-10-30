@@ -33,6 +33,10 @@ const orderOnTransitRouter = require("./routes/orderOnTransitRoute");
 const orderOnCompletionRouter = require("./routes/orderOnCompletionRoute");
 const cartRoute = require("./routes/cartRoute");
 const rateRoute = require("./routes/rateRoute");
+const relatedProductRoute = require("./routes/relatedProductRoute");
+const productsOnSaleRoute = require("./routes/productsOnSaleRoute");
+const logisticsPartnerRoute = require("./routes/logisticsPartnerRoute");
+const deliveryRoute = require("./routes/deliveryRoute");
 
 const app = express();
 
@@ -123,6 +127,10 @@ app.use("/api/v1/orderontransits", orderOnTransitRouter);
 app.use("/api/v1/orderoncompletions", orderOnCompletionRouter);
 app.use("/api/v1/carts", cartRoute);
 app.use("/api/v1/rates", rateRoute);
+app.use("/api/v1/relatedproducts", relatedProductRoute);
+app.use("/api/v1/productsonsale", productsOnSaleRoute);
+app.use("/api/v1/logisticspartners", logisticsPartnerRoute);
+app.use("/api/v1/deliveries", deliveryRoute);
 
 //tackling unhandled routes
 app.all("*", (req, res, next) => {

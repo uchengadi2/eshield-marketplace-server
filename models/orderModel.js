@@ -16,6 +16,14 @@ const orderSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Product",
     },
+    productCategory: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Category",
+    },
+    productVendor: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Vendor",
+    },
     quantityAdddedToCart: {
       type: Number,
     },
@@ -80,6 +88,15 @@ const orderSchema = new mongoose.Schema(
     paymentMethod: {
       type: String,
       enum: ["cheque", "card", "bankransfer", "cash"],
+    },
+    status: {
+      type: String,
+      default: "unprocessed",
+      enum: ["unprocessed", "ready-for-delivery", "rejected"],
+    },
+    rejectionReason: {
+      type: String,
+      trim: true,
     },
   },
   {
