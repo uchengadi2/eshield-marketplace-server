@@ -83,16 +83,22 @@ const orderSchema = new mongoose.Schema(
 
     paymentStatus: {
       type: String,
-      enum: ["to-be-confirmed", "paid-but-awaiting-confirmation", "paid"],
+      enum: ["to-be-confirmed", "paid", "not-processed"],
+      default: "to-be-confirmed",
     },
     paymentMethod: {
       type: String,
-      enum: ["cheque", "card", "bankransfer", "cash"],
+      enum: ["cheque", "card", "bank-transfer", "cash"],
     },
     status: {
       type: String,
       default: "unprocessed",
-      enum: ["unprocessed", "ready-for-delivery", "rejected"],
+      enum: [
+        "unprocessed",
+        "ready-for-delivery",
+        "rejected",
+        "assigned-for-delivery",
+      ],
     },
     rejectionReason: {
       type: String,

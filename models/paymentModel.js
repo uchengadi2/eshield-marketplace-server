@@ -3,12 +3,16 @@ const validator = require("validator");
 
 const paymentSchema = new mongoose.Schema(
   {
-    order: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Order",
-      },
-    ],
+    refNumber: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    order: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Order",
+    },
+
     vendor: [
       {
         type: mongoose.Schema.ObjectId,
@@ -21,83 +25,30 @@ const paymentSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    totalAmountExpected: {
+    totalProductAmount: {
       type: Number,
       required: [true, "Please provide the total amount of this contract"],
     },
-    totalAmountAlreadyPaid: {
+    amountPaid: {
       type: Number,
       default: 0,
       required: [false, "Please provide the total amount of this contract"],
     },
-
-    lastPaymentRound: {
+    totalDeliveryCost: {
       type: Number,
-      default: 0,
     },
-    currentPaymentRound: { type: Number, default: 0 },
-    startingPaymentDate: Date,
-    lastPaymentDate: Date,
-    agreedPaymentCurrency: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Currency",
-      },
-    ],
 
-    agreedNumberOfPaymentInstallements: {
-      type: Number,
-      default: 1,
-      enum: [1, 2, 3],
+    paymentCurrency: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Currency",
     },
-    paymentStatus: {
+
+    paymentConfirmationStatus: {
       type: String,
-      default: "pending",
-      enum: ["pending", "partial", "full"],
+      enum: ["confirmed-full", "confirmed-partial", "not-confirmed"],
     },
 
-    paymentBreakdown: {
-      initialPaymentInstallment: {
-        percentageForInitialPayment: { type: Number, default: 0 },
-        initialPaymentAmountExpected: { type: Number, default: 0 },
-        initialPaymentAmountPaid: { type: Number, default: 0 },
-        lastInitialPaymentAmountMade: { type: Number, default: 0 },
-        dateFirstInitialPaymentWasMade: Date,
-        dateLastInitialPaymentAmountWasMade: Date,
-        initialPaymentStatus: {
-          type: String,
-          default: "pending",
-          enum: ["pending", "partiallyPaid", "fullyPaid"],
-        },
-      },
-      secondInstallmentPayment: {
-        percentageForSecondPayment: { type: Number, default: 0 },
-        secondPaymentAmountExpected: { type: Number, default: 0 },
-        secondPaymentAmountPaid: { type: Number, default: 0 },
-        lastSecondPaymentAmountMade: { type: Number, default: 0 },
-        dateFirstSecondPaymentWasMade: Date,
-        dateLastSecondPaymentAmountWasMade: Date,
-        secondPaymentStatus: {
-          type: String,
-          default: "pending",
-          enum: ["pending", "partiallyPaid", "fullyPaid"],
-        },
-      },
-      thirdInstallmentPayment: {
-        percentageForThirdPayment: { type: Number, default: 0 },
-        thirdPaymentAmountExpected: { type: Number, default: 0 },
-        thirdPaymentAmountPaid: { type: Number, default: 0 },
-        lastThirdPaymentAmountMade: { type: Number, default: 0 },
-        thirdSecondPaymentWasMade: Date,
-        dateLastThirdPaymentAmountWasMade: Date,
-        thirdPaymentStatus: {
-          type: String,
-          default: "pending",
-          enum: ["pending", "partiallyPaid", "fullyPaid"],
-        },
-      },
-    },
-    paymentAgreementBookedBy: [
+    paymentConfirmedBy: [
       {
         type: mongoose.Schema.ObjectId,
         ref: "User",
@@ -106,6 +57,18 @@ const paymentSchema = new mongoose.Schema(
     datePosted: {
       type: Date,
       default: Date.now,
+    },
+    paymentDate: {
+      type: Date,
+    },
+    remittanceStatus: {
+      type: String,
+      enum: ["pending-or-partial", "full"],
+      default: "pending-or-partial",
+    },
+    totalSumRemitted: {
+      type: Number,
+      default: 0,
     },
   },
 

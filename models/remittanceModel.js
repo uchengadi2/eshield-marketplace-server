@@ -3,6 +3,11 @@ const validator = require("validator");
 
 const remittanceSchema = new mongoose.Schema(
   {
+    refNumber: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     order: [
       {
         type: mongoose.Schema.ObjectId,
@@ -27,55 +32,47 @@ const remittanceSchema = new mongoose.Schema(
         ref: "Customer",
       },
     ],
-    prevailingBaseCurrency: String,
-    generalRemittanceStatus: {
+    remittanceStatus: {
       type: String,
       default: "pending",
       enum: ["pending", "partial", "complete"],
     },
-    paymentPhase: [
-      {
-        type: String,
-        default: "initailPayment",
-        enum: ["initialPayment", "secondPayment", "thirdPayment"],
-      },
-    ],
 
-    remittance: {
-      agreedRemittanceCurrency: [
-        {
-          type: mongoose.Schema.ObjectId,
-          ref: "Currency",
-        },
-      ],
-      agreedRemittanceBaseExchangeRate: Number,
-      paymentRemittanceDate: Date,
-      totalAmountExpectedForRemittance: Number,
-      actualAmountRemitted: Number,
-      remittanceStatus: {
-        type: String,
-        default: "pending",
-        enum: ["pending", "partial", "complete"],
-      },
+    amountRemitted: {
+      type: Number,
+    },
+    totalRemittableAmount: {
+      type: Number,
+    },
+    remittanceCurrency: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Currency",
     },
 
-    retention: {
-      agreedRetentionCurrency: [
-        {
-          type: mongoose.Schema.ObjectId,
-          ref: "Currency",
-        },
-      ],
-      agreedRetentionBaseExchangeRate: Number,
-      paymentRetentionDate: Date,
-      totalAmountExpectedForRetention: Number,
-      amountRetained: Number,
-      retentionStatus: {
-        type: String,
-        default: "pending",
-        enum: ["pending", "partial", "complete"],
-      },
+    dateRemitted: {
+      type: Date,
     },
+    remittanceMethod: {
+      type: String,
+      enum: ["cash-payment", "bank-transfer", "cheque-payment"],
+    },
+
+    bankName: {
+      type: String,
+    },
+    bankAccountNumber: {
+      type: String,
+    },
+    accountTitle: {
+      type: String,
+    },
+    chequeNumber: {
+      type: String,
+    },
+    bankChequeOwner: {
+      type: String,
+    },
+
     postedBy: [
       {
         type: mongoose.Schema.ObjectId,

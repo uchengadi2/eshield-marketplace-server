@@ -30,6 +30,10 @@ const logisticsPartnerSchema = new mongoose.Schema(
         ref: "Country",
       },
     ],
+    partnerState: {
+      type: mongoose.Schema.ObjectId,
+      ref: "State",
+    },
     location: {
       locationAddress: String,
       locationCity: [

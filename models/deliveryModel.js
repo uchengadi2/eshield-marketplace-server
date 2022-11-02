@@ -9,6 +9,11 @@ const deliverySchema = new mongoose.Schema(
       unique: true,
     },
 
+    order: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Order",
+    },
+
     product: {
       type: mongoose.Schema.ObjectId,
       ref: "Product",
@@ -59,7 +64,7 @@ const deliverySchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["assigned", "on-transit", "returned", "completed"],
+      enum: ["assigned", "on-transit", "returned", "fullfilled"],
     },
     returnReason: {
       type: String,
@@ -69,12 +74,30 @@ const deliverySchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "LogisticsPartner",
     },
+    logisticsPartnerState: {
+      type: mongoose.Schema.ObjectId,
+      ref: "State",
+    },
+    logisticsPartnerCountry: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Country",
+    },
     dateAssigned: {
       type: Date,
+      default: Date.now,
     },
     assignedBy: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
+    },
+    deliveryCommencementDate: {
+      type: Date,
+    },
+    deliveryCompletedDate: {
+      type: Date,
+    },
+    deliveryReturnedDate: {
+      type: Date,
     },
   },
   {
