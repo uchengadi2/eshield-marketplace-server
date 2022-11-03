@@ -182,70 +182,72 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 
-exports.createUser = catchAsync(async (req, res, next) => {
-  const newUser = await User.create({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
-    passwordChangedAt: req.body.passwordChangedAt,
-    role: req.body.role,
-    type: req.body.type,
-    passwordResetToken: req.body.passwordResetToken,
-    vendor: req.body.vendor,
-  });
+// exports.createUser = catchAsync(async (req, res, next) => {
+//   const newUser = await User.create({
+//     name: req.body.name,
+//     email: req.body.email,
+//     password: req.body.password,
+//     passwordConfirm: req.body.passwordConfirm,
+//     passwordChangedAt: req.body.passwordChangedAt,
+//     role: req.body.role,
+//     type: req.body.type,
+//     passwordResetToken: req.body.passwordResetToken,
+//     vendor: req.body.vendor,
+//   });
 
-  //createSendToken(newUser, 201, res);
-  //2. Generate the random reset token
-  const resetToken = newUser.createPasswordResetToken();
-  await newUser.save({ validateBeforeSave: false });
-  //3. Send it to user's email
-  const resetUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/users/resetpassword/${resetToken};`;
-  const message = `You have been created successfully? Please click on this link to reset your password ${resetUrl}, \n Please kindly ignore if you did not request to be created`;
+//   //createSendToken(newUser, 201, res);
+//   //2. Generate the random reset token
+//   const resetToken = newUser.createPasswordResetToken();
+//   await newUser.save({ validateBeforeSave: false });
+//   //3. Send it to user's email
+//   const resetUrl = `${req.protocol}://${req.get(
+//     "host"
+//   )}/api/v1/users/resetpassword/${resetToken};`;
+//   const message = `You have been created successfully? Please click on this link to reset your password ${resetUrl}, \n Please kindly ignore if you did not request to be created`;
 
-  try {
-    await sendEmail({
-      email: newUser.email,
-      subject: "Your password Reset Token (valid for 10 mins)",
-      message,
-    });
+//   try {
+//     await sendEmail({
+//       email: newUser.email,
+//       subject: "Your password Reset Token (valid for 10 mins)",
+//       message,
+//     });
 
-    //prepare data to send to the client
-    const data = {
-      name: req.body.name,
-      email: req.body.email,
-      role: req.body.role,
-      type: req.body.type,
-      vendor: req.body.vendor,
-    };
-    //send data to the client
-    // res.status(200).json({
-    //   status: "success",
-    //   message: "Token sent via email to the user",
+//     //prepare data to send to the client
+//     const data = {
+//       name: req.body.name,
+//       email: req.body.email,
+//       role: req.body.role,
+//       type: req.body.type,
+//       vendor: req.body.vendor,
+//     };
+//     //send data to the client
+//     // res.status(200).json({
+//     //   status: "success",
+//     //   message: "Token sent via email to the user",
 
-    // });
-    res.status(200).json({
-      status: "success",
-      message: "Token sent via email to the user",
-      data: {
-        data: data,
-      },
-    });
-  } catch (err) {
-    newUser.passwordResetToken = undefined;
-    newUser.passwordResetExpires = undefined;
-    await newUser.save({ validateBeforeSave: false });
+//     // });
+//     res.status(200).json({
+//       status: "success",
+//       message: "Token sent via email to the user",
+//       data: {
+//         data: data,
+//       },
+//     });
+//   } catch (err) {
+//     newUser.passwordResetToken = undefined;
+//     newUser.passwordResetExpires = undefined;
+//     await newUser.save({ validateBeforeSave: false });
 
-    return next(
-      new AppError(
-        "There was an error sending the email for password reset, Try again later"
-      ),
-      500
-    );
-  }
-});
+//     return next(
+//       new AppError(
+//         "There was an error sending the email for password reset, Try again later"
+//       ),
+//       500
+//     );
+//   }
+// });
+
+exports.createUser = factory.createOne(User);
 
 exports.updateUser = factory.updateOne(User);
 
