@@ -6,15 +6,21 @@ const authController = require("./../controllers/authController");
 const router = express.Router();
 
 //provide protection with the protect middleware
-router.use(authController.protect);
+//router.use(authController.protect);
 
 //ensure appropriate authorization
 //router.use(authController.restrictTo());
 
 router
   .route("/")
-  .get(authController.restrictTo("admin"), vendorController.getAllVendors)
+  .get(
+    authController.protect,
+    authController.restrictTo("admin"),
+    vendorController.getAllVendors
+  )
   .post(vendorController.createVendor);
+
+router.use(authController.protect);
 
 router
   .route("/:id")

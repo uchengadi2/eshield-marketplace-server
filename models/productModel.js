@@ -42,11 +42,13 @@ const productSchema = new mongoose.Schema(
 
     totalUnits: {
       type: Number,
+      default: 0,
 
       required: [false, "A product must have quanyity"],
     },
     remainingTotalUnits: {
       type: Number,
+      default: 0,
     },
 
     category: [
@@ -110,6 +112,7 @@ const productSchema = new mongoose.Schema(
     },
     pricePerUnit: {
       type: Number,
+      default: 0,
     },
     currency: {
       type: mongoose.Schema.ObjectId,
@@ -138,27 +141,34 @@ const productSchema = new mongoose.Schema(
     },
     minimumQuantity: {
       type: Number,
+      default: 0,
     },
     unit: {
       type: String,
     },
     deliveryCostPerUnitWithinProductLocation: {
       type: Number,
+      default: 0,
     },
     baselineDeliveryCostWithinProductLocation: {
       type: Number,
+      default: 0,
     },
     maxmumQuantityForBaselineDelivery: {
       type: Number,
+      default: 0,
     },
     estimatedDeliveryPeriodInDays: {
       type: Number,
+      default: 0,
     },
     estimatedDeliveryPeriodInHours: {
       type: Number,
+      default: 0,
     },
     estimatedDeliveryPeriodInMinutes: {
       type: Number,
+      default: 0,
     },
 
     createdAt: {
@@ -176,10 +186,14 @@ const productSchema = new mongoose.Schema(
     isFeaturedProduct: {
       type: Boolean,
       default: false,
+      enumL: [false, true],
     },
 
     priceMarkupPerUnit: {
       type: Number,
+    },
+    configuration: {
+      type: String,
     },
   },
   {

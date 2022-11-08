@@ -1,4 +1,4 @@
-const ProductsOnSale = require("../models/ProductsOnSaleModel");
+const ProductsOnSale = require("../models/productsOnSaleModel");
 const factory = require("./handlerFactory");
 
 //get the handler to get all product on sale

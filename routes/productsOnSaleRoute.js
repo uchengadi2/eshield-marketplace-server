@@ -1,6 +1,6 @@
 const express = require("express");
 
-const ProductOnSaleController = require("./../controllers/ProductsOnSaleController");
+const ProductOnSaleController = require("./../controllers/productsOnSaleController");
 const authController = require("./../controllers/authController");
 
 const router = express.Router();
@@ -8,13 +8,13 @@ const router = express.Router();
 router
   .route("/")
   .get(
-    authController.protect,
-    authController.restrictTo("partner_admin", "partner_user", "admin"),
+    //authController.protect,
+    //authController.restrictTo("admin", "user", "staff"),
     ProductOnSaleController.getAllProductsOnSale
   )
   .post(
     authController.protect,
-    authController.restrictTo("partner_admin", "partner_user", "admin"),
+    authController.restrictTo("admin", "user", "staff"),
     ProductOnSaleController.createProductOnSale
   );
 
@@ -24,15 +24,15 @@ router.use(authController.protect);
 router
   .route("/:id")
   .get(
-    authController.restrictTo("partner_admin", "partner_user", "admin"),
+    //authController.restrictTo("admin", "user", "staff"),
     ProductOnSaleController.getProductOnSale
   )
   .patch(
-    authController.restrictTo("partner_admin", "partner_user", "admin"),
+    authController.restrictTo("admin", "user", "staff"),
     ProductOnSaleController.updateProductOnSale
   )
   .delete(
-    authController.restrictTo("partner_admin", "admin"),
+    authController.restrictTo("admin", "user", "staff"),
     ProductOnSaleController.deleteProductOnSale
   );
 

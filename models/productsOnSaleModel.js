@@ -8,6 +8,9 @@ const productsOnSaleSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Product",
     },
+    refNumber: {
+      type: String,
+    },
     salesPricePerUnit: {
       type: Number,
     },
