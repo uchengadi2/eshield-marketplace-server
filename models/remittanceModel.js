@@ -91,6 +91,22 @@ const remittanceSchema = new mongoose.Schema(
   }
 );
 
+//QUERY MIDDLEWARE
+remittanceSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "payment",
+  });
+  next();
+});
+
+//QUERY MIDDLEWARE
+remittanceSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "vendor",
+  });
+  next();
+});
+
 const Remittance = mongoose.model("Remittance", remittanceSchema);
 
 module.exports = Remittance;

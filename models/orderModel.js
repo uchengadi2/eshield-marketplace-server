@@ -111,6 +111,14 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
+//QUERY MIDDLEWARE
+orderSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "product",
+  });
+  next();
+});
+
 const Order = mongoose.model("Order", orderSchema);
 
 module.exports = Order;

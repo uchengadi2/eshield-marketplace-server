@@ -55,5 +55,13 @@ const stateSchema = new mongoose.Schema(
   }
 );
 
+//QUERY MIDDLEWARE
+stateSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "country",
+  });
+  next();
+});
+
 const State = mongoose.model("State", stateSchema);
 module.exports = State;

@@ -27,6 +27,21 @@ const relatedProductSchema = new mongoose.Schema(
   }
 );
 
+//QUERY MIDDLEWARE
+relatedProductSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "product",
+  });
+  next();
+});
+
+relatedProductSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "relatedProduct",
+  });
+  next();
+});
+
 const RelatedProduct = mongoose.model("RelatedProduct", relatedProductSchema);
 
 module.exports = RelatedProduct;

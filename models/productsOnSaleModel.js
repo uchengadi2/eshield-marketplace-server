@@ -34,6 +34,14 @@ const productsOnSaleSchema = new mongoose.Schema(
   }
 );
 
+//QUERY MIDDLEWARE
+productsOnSaleSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "product",
+  });
+  next();
+});
+
 const ProductsOnSale = mongoose.model("ProductsOnSale", productsOnSaleSchema);
 
 module.exports = ProductsOnSale;

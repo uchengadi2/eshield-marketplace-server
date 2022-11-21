@@ -44,5 +44,13 @@ const citySchema = new mongoose.Schema(
   }
 );
 
+//QUERY MIDDLEWARE
+citySchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "country",
+  });
+  next();
+});
+
 const City = mongoose.model("City", citySchema);
 module.exports = City;

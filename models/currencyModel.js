@@ -41,5 +41,13 @@ const currencySchema = new mongoose.Schema(
   }
 );
 
+//QUERY MIDDLEWARE
+currencySchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "country",
+  });
+  next();
+});
+
 const Currency = mongoose.model("Currency", currencySchema);
 module.exports = Currency;

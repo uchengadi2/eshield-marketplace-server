@@ -78,6 +78,21 @@ const paymentSchema = new mongoose.Schema(
   }
 );
 
+//QUERY MIDDLEWARE
+paymentSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "order",
+  });
+  next();
+});
+
+paymentSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "customer",
+  });
+  next();
+});
+
 const Payment = mongoose.model("Payment", paymentSchema);
 
 module.exports = Payment;

@@ -106,6 +106,23 @@ const deliverySchema = new mongoose.Schema(
   }
 );
 
+//QUERY MIDDLEWARE
+deliverySchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "order",
+    select: "-product",
+  });
+  next();
+});
+
+//QUERY MIDDLEWARE
+deliverySchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "logisticsPartner",
+  });
+  next();
+});
+
 const Delivery = mongoose.model("Delivery", deliverySchema);
 
 module.exports = Delivery;

@@ -112,7 +112,6 @@ const productSchema = new mongoose.Schema(
     },
     pricePerUnit: {
       type: Number,
-      default: 0,
     },
     currency: {
       type: mongoose.Schema.ObjectId,
@@ -141,34 +140,27 @@ const productSchema = new mongoose.Schema(
     },
     minimumQuantity: {
       type: Number,
-      default: 0,
     },
     unit: {
       type: String,
     },
     deliveryCostPerUnitWithinProductLocation: {
       type: Number,
-      default: 0,
     },
     baselineDeliveryCostWithinProductLocation: {
       type: Number,
-      default: 0,
     },
     maxmumQuantityForBaselineDelivery: {
       type: Number,
-      default: 0,
     },
     estimatedDeliveryPeriodInDays: {
       type: Number,
-      default: 0,
     },
     estimatedDeliveryPeriodInHours: {
       type: Number,
-      default: 0,
     },
     estimatedDeliveryPeriodInMinutes: {
       type: Number,
-      default: 0,
     },
 
     createdAt: {
