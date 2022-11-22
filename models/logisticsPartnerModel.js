@@ -54,7 +54,7 @@ const logisticsPartnerSchema = new mongoose.Schema(
           ref: "Country",
         },
       ],
-      locationCoordinates: [Number],
+      //locationCoordinates: [Number],
       // locationLatitude: Number,
       // locationLongititde: Number,
       officePhoneNumber: String,
@@ -70,11 +70,11 @@ const logisticsPartnerSchema = new mongoose.Schema(
     bankDetails: {
       bankName: {
         type: String,
-        required: [true, "Please provide your bank's name"],
+        required: [false, "Please provide your bank's name"],
       },
       bankAccountNumber: {
         type: String,
-        required: [true, "Please provide your bank's account number"],
+        required: [false, "Please provide your bank's account number"],
       },
       bankAccountType: {
         type: String,
@@ -83,7 +83,7 @@ const logisticsPartnerSchema = new mongoose.Schema(
       },
       bankAccountName: {
         type: String,
-        required: [true, "Please provide the bank's account name"],
+        required: [false, "Please provide the bank's account name"],
       },
       bankCountry: [
         {

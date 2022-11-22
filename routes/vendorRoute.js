@@ -24,14 +24,11 @@ router.use(authController.protect);
 
 router
   .route("/:id")
-  .get(
-    authController.restrictTo("admin", "partner"),
-    vendorController.getVendor
-  )
+  .get(authController.restrictTo("admin", "staff"), vendorController.getVendor)
   .patch(
-    authController.restrictTo("admin", "partner"),
-    vendorController.uploadVendorLogo,
-    vendorController.resizeVendorLogo,
+    authController.restrictTo("admin", "staff"),
+    // vendorController.uploadVendorLogo,
+    // vendorController.resizeVendorLogo,
     vendorController.updateVendor
   )
   .delete(authController.restrictTo("admin"), vendorController.deleteVendor);
