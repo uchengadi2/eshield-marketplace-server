@@ -27,6 +27,10 @@ const productsOnSaleSchema = new mongoose.Schema(
     endDate: {
       type: Date,
     },
+    status: {
+      type: String,
+      enum: ["inactive", "active"],
+    },
   },
   {
     toJSON: { virtuals: true },

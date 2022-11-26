@@ -50,7 +50,11 @@ const cartSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "unmarked-for-checkout",
-      enum: ["unmarked-for-checkout", "marked-for-checkout"],
+      enum: [
+        "unmarked-for-checkout",
+        "marked-for-checkout",
+        "confirm-for-checkout",
+      ],
     },
     totalDeliveryCost: {
       type: Number,

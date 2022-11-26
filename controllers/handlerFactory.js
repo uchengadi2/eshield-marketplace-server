@@ -72,15 +72,20 @@ exports.getAll = (Model) =>
       .limitFields()
       .pagination();
 
+    const totalFeatures = new APIFeatures(Model.find(), req.query)
+      .filter()
+      .sort();
+
     //const docs = await features.query.explain();
     const docs = await features.query;
-
-    //console.log(tours);
+    //get the total documents
+    const totalDocuments = await totalFeatures.query;
 
     //WE SEND RESONSE
     res.status(200).json({
       status: "success",
       results: docs.length,
+      total: totalDocuments.length,
       data: {
         data: docs,
       },
