@@ -51,7 +51,8 @@ exports.resizeProductCoverImage = catchAsync(async (req, res, next) => {
   }-${Date.now()}-cover.jpeg`;
 
   await sharp(req.file.buffer)
-    .resize(2000, 1333)
+    // .resize(2000, 1333)
+    .resize(500, 500)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
     .toFile(`public/images/products/${req.body.imageCover}`);

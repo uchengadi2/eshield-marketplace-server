@@ -12,7 +12,7 @@ const router = express.Router();
 router.route("/").get(productController.getAllProducts).post(
   //authController.restrictTo("admin"),
   productController.uploadProductCoverImage,
-  productController.resizeProductCoverImage,
+  //productController.resizeProductCoverImage,
   // productController.uploadProductFirstImage,
   // productController.resizeProductFirstImage,
   // productController.uploadProductSecondImage,
