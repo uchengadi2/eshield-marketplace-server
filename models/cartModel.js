@@ -11,6 +11,18 @@ const cartSchema = new mongoose.Schema(
     quantity: {
       type: Number,
     },
+    price: {
+      type: Number,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    currency: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Currency",
+    },
     refNumber: {
       type: String,
     },
@@ -22,6 +34,7 @@ const cartSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+
     productLocation: {
       type: mongoose.Schema.ObjectId,
       ref: "State",
@@ -50,11 +63,7 @@ const cartSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "unmarked-for-checkout",
-      enum: [
-        "unmarked-for-checkout",
-        "marked-for-checkout",
-        "confirm-for-checkout",
-      ],
+      enum: ["unmarked-for-checkout", "marked-for-checkout", "checkedout"],
     },
     totalDeliveryCost: {
       type: Number,

@@ -178,7 +178,7 @@ const productSchema = new mongoose.Schema(
     isFeaturedProduct: {
       type: Boolean,
       default: false,
-      enumL: [false, true],
+      enum: [false, true],
     },
 
     priceMarkupPerUnit: {
