@@ -9,34 +9,43 @@ const deliverySchema = new mongoose.Schema(
       unique: true,
     },
 
-    order: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Order",
+    orderNumber: {
+      type: String,
+      required: true,
     },
+    // product: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: "Product",
+    // },
+    // productVendor: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: "Vendor",
+    // },
 
-    product: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Product",
-    },
-    productVendor: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Vendor",
-    },
+    // quantity: {
+    //   type: Number,
+    // },
 
-    quantity: {
-      type: Number,
+    // sourceState: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: "State",
+    // },
+    // sourceCountry: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: "Country",
+    // },
+    // deliveryCost: {
+    //   type: Number,
+    // },
+    dateOrdered: {
+      type: Date,
+      default: Date.now,
     },
-
-    sourceState: {
-      type: mongoose.Schema.ObjectId,
-      ref: "State",
+    customerEmail: {
+      type: String,
     },
-    sourceCountry: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Country",
-    },
-    deliveryCost: {
-      type: Number,
+    customerPhoneNumber: {
+      type: String,
     },
 
     recipientName: {

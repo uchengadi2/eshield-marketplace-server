@@ -37,6 +37,7 @@ const relatedProductRoute = require("./routes/relatedProductRoute");
 const productsOnSaleRoute = require("./routes/productsOnSaleRoute");
 const logisticsPartnerRoute = require("./routes/logisticsPartnerRoute");
 const deliveryRoute = require("./routes/deliveryRoute");
+const transactionRoute = require("./routes/transactionRoute");
 
 const app = express();
 
@@ -59,7 +60,7 @@ if (process.env.NODE_ENV === "development") {
 
 const limiter = rateLimit({
   max: 15000,
-  windowMs: 60 * 60 * 1000,
+  windowMs: 6 * 6 * 10,
   message: "Too many request from this IP, Please try again in an hour",
 });
 
@@ -131,6 +132,7 @@ app.use("/api/v1/relatedproducts", relatedProductRoute);
 app.use("/api/v1/productsonsale", productsOnSaleRoute);
 app.use("/api/v1/logisticspartners", logisticsPartnerRoute);
 app.use("/api/v1/deliveries", deliveryRoute);
+app.use("/api/v1/transactions", transactionRoute);
 
 //tackling unhandled routes
 app.all("*", (req, res, next) => {

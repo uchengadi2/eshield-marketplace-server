@@ -36,14 +36,12 @@ router.patch(
 );
 router.delete("/deleteMe", authController.protect, userController.deleteMe);
 
-router
-  .route("/")
-  .get(userController.getAllUsers)
-  .post(
-    authController.protect,
-    authController.restrictTo("admin", "user"),
-    userController.createUser
-  );
+router.route("/").get(userController.getAllUsers).post(
+  authController.protect,
+  // authController.restrictTo("admin", "user"),
+  authController.restrictTo("admin"),
+  userController.createUser
+);
 
 //router.use(authController.restrictTo("admin", "user"));
 router.use(authController.protect);
