@@ -8,17 +8,15 @@ const paymentSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    order: {
+    orderNumber: {
+      type: String,
+      required: true,
+    },
+    transaction: {
       type: mongoose.Schema.ObjectId,
-      ref: "Order",
+      ref: "Transaction",
     },
 
-    vendor: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Vendor",
-      },
-    ],
     customer: [
       {
         type: mongoose.Schema.ObjectId,
@@ -27,12 +25,14 @@ const paymentSchema = new mongoose.Schema(
     ],
     totalProductAmount: {
       type: Number,
-      required: [true, "Please provide the total amount of this contract"],
     },
     amountPaid: {
       type: Number,
       default: 0,
-      required: [false, "Please provide the total amount of this contract"],
+    },
+    amountAlreadyPaid: {
+      type: Number,
+      default: 0,
     },
     totalDeliveryCost: {
       type: Number,

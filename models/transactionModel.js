@@ -67,6 +67,8 @@ const transactionSchema = new mongoose.Schema(
         "ready-for-delivery",
         "rejected",
         "assigned-for-delivery",
+        "returned",
+        "fullfilled",
       ],
     },
     rejectionReason: {

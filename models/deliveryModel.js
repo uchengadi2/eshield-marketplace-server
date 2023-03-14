@@ -13,30 +13,11 @@ const deliverySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // product: {
-    //   type: mongoose.Schema.ObjectId,
-    //   ref: "Product",
-    // },
-    // productVendor: {
-    //   type: mongoose.Schema.ObjectId,
-    //   ref: "Vendor",
-    // },
+    transaction: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Transaction",
+    },
 
-    // quantity: {
-    //   type: Number,
-    // },
-
-    // sourceState: {
-    //   type: mongoose.Schema.ObjectId,
-    //   ref: "State",
-    // },
-    // sourceCountry: {
-    //   type: mongoose.Schema.ObjectId,
-    //   ref: "Country",
-    // },
-    // deliveryCost: {
-    //   type: Number,
-    // },
     dateOrdered: {
       type: Date,
       default: Date.now,
